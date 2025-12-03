@@ -30,9 +30,10 @@ import numpy as np
 from stable_baselines3.common.evaluation import evaluate_policy 
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3 import PPO
+import cv2
 
 # Create the CartPole environment and wrap it with a Monitor 
-env = gym.make('CartPole-v1')
+env = gym.make('CartPole-v1', render_mode='rgb_array')
 env = Monitor(env)
 
 # Initialize the PPO agent
@@ -50,8 +51,8 @@ mean_reward, std_reward = evaluate_policy(model, env, n_eval_episodes=100)
 
 # Save the model
 model.save("cartpole_ppo")
-
 print("Training completed!")
+
 # Prepare the results dictionary 
 results = {
   "mean_reward": mean_reward,
@@ -60,6 +61,4 @@ results = {
 } 
 print(f"Mean reward: {mean_reward:.2f} +/- {std_reward:.2f}")
 `
-
-
 };
